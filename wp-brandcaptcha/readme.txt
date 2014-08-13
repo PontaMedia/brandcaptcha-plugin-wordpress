@@ -1,7 +1,7 @@
 == Installation ==
 
 1. Upload the `wp-recaptcha` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the `Plugins` menu in WordPress
+2. Activate the plugin through the `Plugins` menu in WordPress
 
 
 == Requirements ==
