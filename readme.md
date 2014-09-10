@@ -4,7 +4,8 @@
 
 DIRECT DOWNLOAD (Ready to install in Wordpress)
 
-Download the plugin directly from this URL: https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/raw/master/wp-brandcaptcha.zip
+Download the plugin directly from this URL
+https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/raw/master/wp-brandcaptcha.zip
 
 
 SOURCE CODE
