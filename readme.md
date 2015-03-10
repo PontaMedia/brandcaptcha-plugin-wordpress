@@ -2,11 +2,6 @@
 
 ##Installation
 
-DIRECT DOWNLOAD (Ready for install in Wordpress)
-
-Download the plugin directly from this URL
-https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/raw/master/wp-brandcaptcha.zip
-
 
 SOURCE CODE
 

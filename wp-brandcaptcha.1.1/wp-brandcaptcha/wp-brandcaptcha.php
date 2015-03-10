@@ -1,18 +1,20 @@
-Copyright (c) 2013 by PontaMedia & Zarego
-Author: Matias Dominoni
+<?php
+/*
+Copyright (c) 2014 by PontaMedia & Zarego
+AUTHORS: Matias Dominoni
 
 This is a WordPress Plugin that handles calling BrandCaptcha.
-- Documentation and latest version http://www.pontamedia.com/
+- Documentation http://www.pontamedia.com/docs/
+- latest version https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/blob/master/wp-brandcaptcha.zip
 
 This code is based on code from, and copied, modified and distributed 
-with permission in accordance with its terms:
-
+with permission in accordance with its terms: 
 
 Copyright (c) 2008 reCAPTCHA -- http://recaptcha.net
 AUTHORS:
   Mike Crawford
   Ben Maurer
-  Jorge Pe�a
+  Jorge Peña
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,3 +33,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+
+Plugin Name: WP-brandCAPTCHA
+Plugin URI: http://www.pontamedia.com/
+Description: Integrates BrandCaptcha anti-spam solutions with wordpress by PontaMedia
+Version: 1.1.0
+Author: Matias Dominoni, Zarego - Pontamedia 
+Email: soporte@pontamedia.com
+Author URI: http://www.zarego.com
+License: GPL2
+*/
+
+// this is the 'driver' file that instantiates the objects and registers every hook
+
+define('ALLOW_INCLUDE', true);
+
+require_once('brandcaptcha.php');
+
+$brandcaptcha = new brandCAPTCHA('brandcaptcha_options');
+
+?>

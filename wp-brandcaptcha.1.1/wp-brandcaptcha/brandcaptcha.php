@@ -38,7 +38,7 @@ if (!class_exists('brandCAPTCHA')) {
             if ($this->options['show_in_registration'])
                 add_action('login_head', array(&$this, 'registration_style')); // make unnecessary: instead use jQuery and add to the footer?
 
-            // options
+           // options
             register_activation_hook(WPPlugin::path_to_plugin_directory() . '/wp-brandcaptcha.php', array(&$this, 'register_default_options')); // this way it only happens once, when the plugin is activated
             add_action('admin_init', array(&$this, 'register_settings_group'));
 
@@ -51,7 +51,7 @@ if (!class_exists('brandCAPTCHA')) {
                     add_action('register_form', array(&$this, 'show_brandcaptcha_in_registration'));
             }
 
-            // only register the hooks if the user wants brandcaptcha on the comments page
+        // only register the hooks if the user wants brandcaptcha on the comments page
             if ($this->options['show_in_comments']) {
                 add_action('comment_form', array(&$this, 'show_brandcaptcha_in_comments'));
 
@@ -92,9 +92,9 @@ if (!class_exists('brandCAPTCHA')) {
            
             $option_defaults = array();
            
-            $old_options = WPPlugin::retrieve_options("brandcaptcha");
+           $old_options = WPPlugin::retrieve_options("brandcaptcha");
            
-            if ($old_options) {
+          if ($old_options) {
                $option_defaults['public_key'] = $old_options['pubkey']; // the public key for brandCAPTCHA
                $option_defaults['private_key'] = $old_options['privkey']; // the private key for brandCAPTCHA
 
@@ -110,13 +110,21 @@ if (!class_exists('brandCAPTCHA')) {
                   $option_defaults['minimum_bypass_level'] = "activate_plugins";
                }
 
+               // styling
+               $option_defaults['comments_theme'] = $old_options['re_theme']; // the default theme for brandCAPTCHA on the comment post
+               $option_defaults['registration_theme'] = $old_options['re_theme_reg']; // the default theme for brandCAPTCHA on the registration form
+               $option_defaults['brandcaptcha_language'] = $old_options['re_lang']; // the default language for brandCAPTCHA
+               $option_defaults['xhtml_compliance'] = $old_options['re_xhtml']; // whether or not to be XHTML 1.0 Strict compliant
+               $option_defaults['comments_tab_index'] = $old_options['re_tabindex']; // the default tabindex for brandCAPTCHA
+               $option_defaults['registration_tab_index'] = 30; // the default tabindex for brandCAPTCHA
+
                // error handling
                $option_defaults['no_response_error'] = $old_options['error_blank']; // message for no CAPTCHA response
                $option_defaults['incorrect_response_error'] = $old_options['error_incorrect']; // message for incorrect CAPTCHA response
             }
            
             else {
-               // keys
+              // keys
                $option_defaults['public_key'] = ''; // the public key for brandCAPTCHA
                $option_defaults['private_key'] = ''; // the private key for brandCAPTCHA
 
@@ -127,9 +135,16 @@ if (!class_exists('brandCAPTCHA')) {
                // bypass levels
                $option_defaults['bypass_for_registered_users'] = 1; // whether to skip brandCAPTCHAs for registered users
                $option_defaults['minimum_bypass_level'] = 'read'; // who doesn't have to do the brandCAPTCHA (should be a valid WordPress capability slug)
+               // styling
+               $option_defaults['comments_theme'] = 'default'; // the default theme for brandCAPTCHA on the comment post
+               $option_defaults['registration_theme'] = 'default'; // the default theme for brandCAPTCHA on the registration form
+               $option_defaults['brandcaptcha_language'] = 'en'; // the default language for brandCAPTCHA
+               $option_defaults['xhtml_compliance'] = 0; // whether or not to be XHTML 1.0 Strict compliant
+               $option_defaults['comments_tab_index'] = 5; // the default tabindex for brandCAPTCHA
+               $option_defaults['registration_tab_index'] = 30; // the default tabindex for brandCAPTCHA
 
                // error handling
-               $option_defaults['no_response_error'] = '<strong>ERROR</strong>: Please fill in the brandCAPTCHA form.'; // message for no CAPTCHA response
+              $option_defaults['no_response_error'] = '<strong>ERROR</strong>: Please fill in the brandCAPTCHA form.'; // message for no CAPTCHA response
                $option_defaults['incorrect_response_error'] = '<strong>ERROR</strong>: That brandCAPTCHA response was incorrect.'; // message for incorrect CAPTCHA response
             }
             
@@ -150,14 +165,15 @@ if (!class_exists('brandCAPTCHA')) {
         // todo: make unnecessary
         function register_stylesheets() {
             $path = WPPlugin::url_to_plugin_directory() . '/brandcaptcha.css';
-                
+
             echo '<link rel="stylesheet" type="text/css" href="' . $path . '" />';
         }
         
         // stylesheet information
         // todo: this 'hack' isn't nice, try to figure out a workaround
         function registration_style() {
-            $width = 0; // the width of the brandcaptcha form
+           $width = 0; // the width of the brandcaptcha form
+
 
                 $width = 360;
 
@@ -183,7 +199,7 @@ REGISTRATION;
         function create_error_notice($message, $anchor = '') {
             $options_url = admin_url('options-general.php?page=wp-brandcaptcha/brandcaptcha.php') . $anchor;
             $error_message = sprintf(__($message . ' <a href="%s" title="WP-brandCAPTCHA Options">Fix this</a>', 'brandcaptcha'), $options_url);
-            
+
             echo '<div class="error"><p><strong>' . $error_message . '</strong></p></div>';
         }
         
@@ -213,9 +229,21 @@ REGISTRATION;
             $validated['bypass_for_registered_users'] = ($input['bypass_for_registered_users'] == 1 ? 1: 0);
             
             $capabilities = array ('read', 'edit_posts', 'publish_posts', 'moderate_comments', 'activate_plugins');
+            $themes = array ('default');
+            
+            $brandcaptcha_languages = array ('en', 'pt', 'es');
             
             $validated['minimum_bypass_level'] = $this->validate_dropdown($capabilities, 'minimum_bypass_level', $input['minimum_bypass_level']);
+            $validated['comments_theme'] = $this->validate_dropdown($themes, 'comments_theme', $input['comments_theme']);
+            
+            $validated['comments_tab_index'] = $input['comments_tab_index'] ? $input["comments_tab_index"] : 5; // use the intval filter
+            
             $validated['show_in_registration'] = ($input['show_in_registration'] == 1 ? 1 : 0);
+            $validated['registration_theme'] = $this->validate_dropdown($themes, 'registration_theme', $input['registration_theme']);
+            $validated['registration_tab_index'] = $input['registration_tab_index'] ? $input["registration_tab_index"] : 30; // use the intval filter
+            
+            $validated['brandcaptcha_language'] = $this->validate_dropdown($brandcaptcha_languages, 'brandcaptcha_language', $input['brandcaptcha_language']);
+            $validated['xhtml_compliance'] = ($input['xhtml_compliance'] == 1 ? 1 : 0);
             
             $validated['no_response_error'] = $input['no_response_error'];
             $validated['incorrect_response_error'] = $input['incorrect_response_error'];
@@ -225,6 +253,11 @@ REGISTRATION;
         
         // display brandcaptcha
         function show_brandcaptcha_in_registration($errors) {
+            $format = <<<FORMAT
+            <script type='text/javascript'>
+            var brandcaptchaOptions = { theme : '{$this->options['registration_theme']}', lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['registration_tab_index']} };
+            </script>
+FORMAT;
 
             $comment_string = <<<COMMENT_FORM
             <script type='text/javascript'>   
@@ -232,7 +265,7 @@ REGISTRATION;
             </script>
 COMMENT_FORM;
 
-            // todo: is this check necessary? look at the latest brandcaptchalib.php
+           // todo: is this check necessary? look at the latest brandcaptchalib.php
                     
             if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")
                 $use_ssl = true;
@@ -263,7 +296,7 @@ COMMENT_FORM;
                 return $errors;
             }
 
-            $response = brandcaptcha_check_answer($this->options['private_key'], $_SERVER['REMOTE_ADDR'], $_POST['brand_cap_challenge'], $_POST['brand_cap_answer']);
+           $response = brandcaptcha_check_answer($this->options['private_key'], $_SERVER['REMOTE_ADDR'], $_POST['brand_cap_challenge'], $_POST['brand_cap_answer']);
 
             // response is bad, add incorrect response error
             if (!$response->is_valid)
@@ -277,7 +310,7 @@ COMMENT_FORM;
             // must make a check here, otherwise the wp-admin/user-new.php script will keep trying to call
             // this function despite not having called do_action('signup_extra_fields'), so the brandcaptcha
             // field was never shown. this way it won't validate if it's called in the admin interface
-            
+
             if (!$this->is_authority()) {
                 // blogname in 2.6, blog_id prior to that
                 // todo: why is this done?
@@ -290,8 +323,8 @@ COMMENT_FORM;
                     return $result;
                 }
                 
-                $response = brandcaptcha_check_answer($this->options['private_key'], $_SERVER['REMOTEADDR'], $_POST['brand_cap_challenge'], $_POST['brand_cap_answer']);
-                
+                $response = brandcaptcha_check_answer($this->options['private_key'], $_SERVER['REMOTE_ADDR'], $_POST['brand_cap_challenge'], $_POST['brand_cap_answer']);
+
                 // response is bad, add incorrect response error
                 // todo: why echo the error here? wpmu specific?
                 if (!$response->is_valid)
@@ -333,6 +366,12 @@ COMMENT_FORM;
                 // Did the user fail to match the CAPTCHA? If so, let them know
                 if ((isset($_GET['rerror']) && $_GET['rerror'] == 'incorrect-captcha-sol'))
                     echo '<p class="brandcaptcha-error">' . $this->options['incorrect_response_error'] . "</p>";
+                //modify the comment form for the brandCAPTCHA widget
+                $brandcaptcha_js_opts = <<<OPTS
+                <script type='text/javascript'>
+                    var brandcaptchaOptions = { theme : '{$this->options['comments_theme']}', lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['comments_tab_index']} };
+                </script>
+OPTS;
 
                 add_action('wp_footer', array(&$this, 'save_comment_script')); // preserve the comment that was entered
 				
@@ -361,7 +400,7 @@ COMMENT_FORM;
                 echo $brandcaptcha_js_opts . $this->get_brandcaptcha_html(isset($escaped_error) ? $escaped_error : null, $use_ssl) . $comment_string;
            }
         }
-        
+ 
         // this is what does the submit-button re-ordering
         function save_comment_script() {
             $javascript = <<<JS
@@ -406,7 +445,7 @@ JS;
                         
                     else {
                         $this->saved_error = $brandcaptcha_response->error;
-                        
+
                         // http://codex.wordpress.org/Plugin_API/Filter_Reference#Database_Writes_2
                         add_filter('pre_comment_approved', create_function('$a', 'return \'spam\';'));
                         return $comment_data;
@@ -476,7 +515,7 @@ JS;
                $settings_link = '<a href="options-general.php?page=wp-brandcaptcha/brandcaptcha.php" title="' . $settings_title . '">' . $settings . '</a>';
                array_unshift($links, $settings_link);
             }
-            
+
             return $links;
         }
         
@@ -493,7 +532,7 @@ JS;
             
             add_options_page('WP-brandCAPTCHA', 'WP-brandCAPTCHA', 'manage_options', __FILE__, array(&$this, 'show_settings_page'));
         }
-        
+
         // store the xhtml in a separate file and use include on it
         function show_settings_page() {
             include("settings.php");
@@ -524,8 +563,27 @@ JS;
             
             $this->build_dropdown('brandcaptcha_options[minimum_bypass_level]', $capabilities, $this->options['minimum_bypass_level']);
         }
+
+        function theme_dropdown($which) {
+            $themes = array (
+                __('Default', 'brandcaptcha') => 'default'
+            );
+            
+            if ($which == 'comments')
+                $this->build_dropdown('brandcaptcha_options[comments_theme]', $themes, $this->options['comments_theme']);
+            else if ($which == 'registration')
+                $this->build_dropdown('brandcaptcha_options[registration_theme]', $themes, $this->options['registration_theme']);
+        }
         
-        
+        function brandcaptcha_language_dropdown() {
+            $languages = array (
+                __('English', 'brandcaptcha') => 'en',
+                __('Portuguese', 'brandcaptcha') => 'pt',
+                __('Spanish', 'brandcaptcha') => 'es'
+            );
+            
+            $this->build_dropdown('brandcaptcha_options[brandcaptcha_language]', $languages, $this->options['brandcaptcha_language']);
+        }
     } // end class declaration
 } // end of class exists clause
 
