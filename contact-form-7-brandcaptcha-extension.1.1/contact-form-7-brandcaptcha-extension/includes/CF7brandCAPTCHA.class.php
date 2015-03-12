@@ -583,15 +583,14 @@ if (!class_exists('CF7brandCAPTCHA')) {
             
             if ($this->options[$this->language_option_name[$this->brandcaptcha_tool]] === 'cf7brandcapext' 
                     && isset($this->options['cf7brandcapext_language'])) {
-
                 $used_language = $this->options['cf7brandcapext_language'];
                 
             } elseif (isset($brandcaptcha_options[$this->options[$this->language_option_name[$this->brandcaptcha_tool]]])) {
-
                 $used_language = $brandcaptcha_options[$this->options[$this->language_option_name[$this->brandcaptcha_tool]]];
                 
             } else {
-                $used_language = 'en';
+                //$used_language = 'es';
+		$used_language = $brandcaptcha_options[$this->options[$this->language_option_name[$this->brandcaptcha_tool]]];
             }
             
              
