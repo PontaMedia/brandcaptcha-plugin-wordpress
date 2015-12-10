@@ -50,7 +50,7 @@ Integrates brandCAPTCHA anti-spam methods with WordPress including comment, regi
 
 To install in regular WordPress and [WordPress MultiSite](http://codex.wordpress.org/Create_A_Network):
 
-1. Upload the `wp-recaptcha` folder to the `/wp-content/plugins/` directory
+1. Upload the `wp-brandcaptcha` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the `Plugins` menu in WordPress
 1. Get the brandCAPTCHA keys [here](http://www.pontamedia.com "brandCAPTCHA API keys") 
 
