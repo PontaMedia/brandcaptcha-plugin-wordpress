@@ -1,7 +1,7 @@
 <?php
 /*
-Copyright (c) 2014 by PontaMedia & Zarego
-AUTHORS: Matias Dominoni
+Copyright (c) 2014 by PontaMedia
+AUTHORS: Pontamedia
 
 This is a WordPress Plugin that handles calling BrandCaptcha.
 - Documentation http://www.pontamedia.com/docs/
@@ -39,9 +39,9 @@ Plugin Name: WP-brandCAPTCHA
 Plugin URI: http://www.pontamedia.com/
 Description: Integrates BrandCaptcha anti-spam solutions with wordpress by PontaMedia
 Version: 1.1.0
-Author: Matias Dominoni, Zarego - Pontamedia 
+Author: Pontamedia 
 Email: soporte@pontamedia.com
-Author URI: http://www.zarego.com
+Author URI: http://www.pontamedia.com
 License: GPL2
 */
 

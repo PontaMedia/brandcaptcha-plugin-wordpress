@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Copyright (c) 2013 by PontaMedia & Zarego
- * Author: Carlos A. Bellucci, Daniel G. Gomez 
+ * Copyright (c) 2013 by PontaMedia
+ * Author: PontaMedia
  *
  * This is a PHP library that handles calling BrandCaptcha.
  *    - Documentation and latest version

@@ -1,56 +1,17 @@
 === Contact Form 7 brandCAPTCHA Extension ===
-/*
+
 Plugin Name: Contact Form 7 brandCAPTCHA extension
-Plugin URI: http://www.pontamedia.com/
+Plugin URI: https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/tree/master/contact-form-7-brandcaptcha-extension.1.1
 Description: Provides WP-brandCAPTCHA possibilities to the Contact Form 7 plugin. Requires both.
 Version: 1.1.0
-Author: Matias Dominoni, Zarego - Pontamedia 
+Author: Pontamedia 
 Email: soporte@pontamedia.com
-Author URI: http://www.zarego.com
+Author URI: http://www.pontamedia.com/
 License: GPL2
 
 Copyright (c) 2014 by PontaMedia & Zarego
 
-- Documentation and latest version http://www.pontamedia.com/
-
-This code is based on code from, and copied, modified and distributed 
-with permission in accordance with its terms:
-
-
-Plugin Name: Contact Form 7 reCAPTCHA extension
-Plugin URI: http://www.a-sd.de/
-Description: Provides WP-reCAPTCHA possibilities to the Contact Form 7 plugin. Requires both.
-Version: 0.1.0
-Author: Andre Pietsch, Advicio (R) ServDesk GmbH
-Email: andre.pietsch@a-sd.de
-Author URI: http://www.a-sd.de
-Text Domain: cf7recapext
-Domain Path: /languages/
-License: GPL2
-*/
-
-/*  Copyright 2011  Andre Pietsch, Advicio ServDesk GmbH (email: andre.pietsch@a-sd.de)
-    
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
-    
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301
-*/
-
-
-Contributors: Matias Dominoni
-Tags: Contact Form 7, Contact, Contact Form, CAPTCHA, brandCAPTCHA, WP-brandCAPTCHA
-Requires at least: 2.9
-Tested up to: 3.8
-Stable tag: 1.0.0
+- Documentation and latest version https://github.com/PontaMedia/brandcaptcha-plugin-wordpress/tree/master/contact-form-7-brandcaptcha-extension.1.1
 
 This plugin provides the *brandCAPTCHA* tag for the Contact Form 7 Plugin. It allows the usage of a brandCAPTCHA field provided by a 3rd party brandCAPTCHA Plugin.
 
