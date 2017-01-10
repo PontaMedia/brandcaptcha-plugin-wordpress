@@ -255,7 +255,7 @@ REGISTRATION;
         function show_brandcaptcha_in_registration($errors) {
             $format = <<<FORMAT
             <script type='text/javascript'>
-            var brandcaptchaOptions = { theme : '{$this->options['registration_theme']}', lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['registration_tab_index']} };
+            var brandcaptchaOptions = { lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['registration_tab_index']} };
             </script>
 FORMAT;
 
@@ -369,7 +369,7 @@ COMMENT_FORM;
                 //modify the comment form for the brandCAPTCHA widget
                 $brandcaptcha_js_opts = <<<OPTS
                 <script type='text/javascript'>
-                    var brandcaptchaOptions = { theme : '{$this->options['comments_theme']}', lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['comments_tab_index']} };
+                    var brandcaptchaOptions = { lang : '{$this->options['brandcaptcha_language']}' , tabindex : {$this->options['comments_tab_index']} };
                 </script>
 OPTS;
 
@@ -564,16 +564,16 @@ JS;
             $this->build_dropdown('brandcaptcha_options[minimum_bypass_level]', $capabilities, $this->options['minimum_bypass_level']);
         }
 
-        function theme_dropdown($which) {
-            $themes = array (
-                __('Default', 'brandcaptcha') => 'default'
-            );
+//         function theme_dropdown($which) {
+//             $themes = array (
+//                 __('Default', 'brandcaptcha') => 'default'
+//             );
             
-            if ($which == 'comments')
-                $this->build_dropdown('brandcaptcha_options[comments_theme]', $themes, $this->options['comments_theme']);
-            else if ($which == 'registration')
-                $this->build_dropdown('brandcaptcha_options[registration_theme]', $themes, $this->options['registration_theme']);
-        }
+//             if ($which == 'comments')
+//                 $this->build_dropdown('brandcaptcha_options[comments_theme]', $themes, $this->options['comments_theme']);
+//             else if ($which == 'registration')
+//                 $this->build_dropdown('brandcaptcha_options[registration_theme]', $themes, $this->options['registration_theme']);
+//         }
         
         function brandcaptcha_language_dropdown() {
             $languages = array (

@@ -1,7 +1,7 @@
 Plugin Name: WP-BrandCaptcha
 Plugin URI: http://www.pontamedia.com/
 Description: Integrates PontaMedia's BandCaptcha anti-spam solutions with wordpress
-Version: 1.1.0
+Version: 1.2.0
 Author: Pontamedia 
 Email: soporte@pontamedia.com
 Author URI: http://www.pontamedia.com
