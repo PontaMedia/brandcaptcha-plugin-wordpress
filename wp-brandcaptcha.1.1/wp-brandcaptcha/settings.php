@@ -53,13 +53,7 @@
             </td>
          </tr>
 
-<!--          <tr valign="top"> -->
-            <th scope="row"><?php // _e('Presentation', 'brandcaptcha'); ?></th>
-<!--             <td> -->
-               <label for="brandcaptcha_options[comments_theme]"><?php // _e('Theme:', 'brandcaptcha'); ?></label>
-               <?php // $this->theme_dropdown('comments'); ?>
-<!--             </td> -->
-<!--          </tr> -->
+         
 
          <tr valign="top">
             <th scope="row"><?php _e('Tab Index', 'brandcaptcha'); ?></th>
@@ -79,13 +73,7 @@
             </td>
          </tr>
          
-<!--          <tr valign="top"> -->
-            <th scope="row"><?php // _e('Presentation', 'brandcaptcha'); ?></th>
-<!--             <td> -->
-               <label for="brandcaptcha_options[registration_theme]"><?php // _e('Theme:', 'brandcaptcha'); ?></label>
-               <?php // $this->theme_dropdown('registration'); ?>
-<!--             </td> -->
-<!--          </tr> -->
+         
          
          <tr valign="top">
             <th scope="row"><?php _e('Tab Index', 'brandcaptcha'); ?></th>
